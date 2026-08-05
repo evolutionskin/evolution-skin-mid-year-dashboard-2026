@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Prompt", "Noto Sans Thai", sans-serif;
+  --font-body: "Noto Sans Thai", "Prompt", sans-serif;
+
+  --color-navy: #0f2747;
+  --color-navy-dark: #08192e;
+  --color-gold: #c9a24d;
+  --color-gold-soft: #f3e8ce;
+  --color-bg: #f5f7fa;
+  --color-text-primary: #18212f;
+  --color-text-secondary: #667085;
+  --color-success: #16a36a;
+  --color-warning: #f59e0b;
+  --color-risk: #e05252;
+  --color-opportunity: #3b78b3;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--color-gold-soft);
+    color: var(--color-navy-dark);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .kicker {
+    font-family: var(--font-display);
+    letter-spacing: 0.14em;
+  }
+}
+
+/* Signature motif: stacked parallelogram bars echoing the Evolution logomark */
+.evo-mark {
+  display: inline-block;
+}
+
+/* Scroll-reveal base state; JS toggles .is-visible */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Print rules */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #ffffff !important;
+  }
+  .print-break {
+    break-inside: avoid;
+  }
+  section {
+    break-inside: avoid-page;
+  }
+}
